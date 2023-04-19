@@ -1,12 +1,8 @@
-# myselectshopbeta
-### 네이버 검색 API를 활용한 상품 가격 비교 웹 서비스
 
-
-
-Project - Reactive Blog
+Project - myselectshopbeta
 ===
 
-> 리액티브 프로그래밍의 학습을 위해서 `Spring-WebFlux`, `Mono/Flux`, `Reactive-Monogo`를 이용하여 진행하는 비동기 Blog API 프로젝트. 
+> 자바, 스프링 학습을 위해서 `Naver Open API`, `Restful API`, `로그인기능`를 이용하여 진행하는 상품 가격 비교 프로젝트. 
 
 ## 개발환경
 
