@@ -1,5 +1,6 @@
-package com.sparta.myselectshopbeta.naver.dto;
-import com.sparta.myselectshopbeta.naver.entity.Product;
+package com.sparta.myselectshopbeta.dto;
+
+import com.sparta.myselectshopbeta.entity.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

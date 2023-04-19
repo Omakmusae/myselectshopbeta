@@ -1,6 +1,6 @@
-package com.sparta.myselectshopbeta.naver.entity;
+package com.sparta.myselectshopbeta.entity;
 
-import com.sparta.myselectshopbeta.naver.dto.ProductRequestDto;
+import com.sparta.myselectshopbeta.dto.ProductRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +15,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID가 자동으로 생성 및 증가합니다.
-    private Long id; // PK
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -37,6 +37,6 @@ public class Product {
         this.image = requestDto.getImage();
         this.link = requestDto.getLink();
         this.lprice = requestDto.getLprice();
-        this.myprice = 0;//초기값 0으로 설정
+        this.myprice = 0;
     }
 }

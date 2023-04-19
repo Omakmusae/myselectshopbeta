@@ -19,5 +19,4 @@ public class NaverApiController {
     public List<ItemDto> searchItems(@RequestParam String query)  {
         return naverApiService.searchItems(query);
     }
-
 }

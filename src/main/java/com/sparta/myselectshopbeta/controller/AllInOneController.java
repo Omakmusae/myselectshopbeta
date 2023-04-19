@@ -1,10 +1,9 @@
-package com.sparta.myselectshopbeta.naver.controller;
+package com.sparta.myselectshopbeta.controller;
 
-
-import com.sparta.myselectshopbeta.naver.dto.ProductMypriceRequestDto;
-import com.sparta.myselectshopbeta.naver.dto.ProductRequestDto;
-import com.sparta.myselectshopbeta.naver.dto.ProductResponseDto;
-import com.sparta.myselectshopbeta.naver.entity.Product;
+import com.sparta.myselectshopbeta.dto.ProductMypriceRequestDto;
+import com.sparta.myselectshopbeta.dto.ProductRequestDto;
+import com.sparta.myselectshopbeta.dto.ProductResponseDto;
+import com.sparta.myselectshopbeta.entity.Product;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
@@ -21,12 +20,12 @@ public class AllInOneController {
         // 요청받은 DTO 로 DB에 저장할 객체 만들기
         Product product = new Product(requestDto);
 
-        // 직접 DB에 연결
+        // DB 연결
         Connection connection = DriverManager.getConnection("jdbc:h2:mem:db", "sa", "");
 
-        // 작성한 DB Query를 담기 위해 PreparedStatement 객체 생성
+        // DB Query 작성
         PreparedStatement ps = connection.prepareStatement("select max(id) as id from product");
-        ResultSet rs = ps.executeQuery();//executeQuery 메소드를 사용해서 DB에 연결을 해서 데이터를 가지고 와서 rs 객체에 저장
+        ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             // product id 설정 = product 테이블의 마지막 id + 1
             product.setId(rs.getLong("id") + 1);
@@ -52,6 +51,7 @@ public class AllInOneController {
         // 응답 보내기
         return new ProductResponseDto(product);
     }
+
     // 관심 상품 조회하기
     @GetMapping("/products")
     public List<ProductResponseDto> getProducts() throws SQLException {
@@ -124,4 +124,5 @@ public class AllInOneController {
         // 응답 보내기 (업데이트된 상품 id)
         return product.getId();
     }
+
 }

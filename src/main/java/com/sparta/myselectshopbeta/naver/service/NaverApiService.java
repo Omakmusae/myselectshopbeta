@@ -18,8 +18,8 @@ public class NaverApiService {
     public List<ItemDto> searchItems(String query) {
         RestTemplate rest = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-Naver-Client-Id", "t_DJSerfkN_PNSgjyh2f"); //my 아이디
-        headers.add("X-Naver-Client-Secret", "BUy5Lfk4qs"); //my 비밀번호
+        headers.add("X-Naver-Client-Id", "ufC7iCHE1eRqXFSjFmTu");
+        headers.add("X-Naver-Client-Secret", "26mXWwGwvw");
         String body = "";
 
         HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
@@ -34,7 +34,7 @@ public class NaverApiService {
         return fromJSONtoItems(response);
     }
 
-    public List<ItemDto> fromJSONtoItems(String response) {//String response의 값은 JSON형식의 데이터
+    public List<ItemDto> fromJSONtoItems(String response) {
 
         JSONObject rjson = new JSONObject(response);
         JSONArray items  = rjson.getJSONArray("items");
