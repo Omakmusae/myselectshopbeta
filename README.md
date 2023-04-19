@@ -117,170 +117,6 @@ Project - Reactive Blog
     | Authorization | `token` |
 
 * `Response`
-
-    * `User`
-
-        ```json
-        {
-            "user": {
-                "email": "...",
-                "token": "...",
-                "username": "...",
-                "bio": "...",
-                "image": null
-            }
-        }
-        ```
-    
-    * `Profile`
-
-        ```json
-        {
-            "profile": {
-                "username": "...",
-                "bio": "...",
-                "image": "...",
-                "following": false
-            }
-        }
-        ```
-
-    * `Single Article`
-
-        ```json
-        {
-            "article": {
-                "slug": "...",
-                "title": "...",
-                "description": "...?",
-                "body": "...",
-                "tagList": ["...", "..."],
-                "createdAt": "9999-99-99T00:00:00.000Z",
-                "updatedAt": "9999-99-99T00:00:00.000Z",
-                "favorited": false,
-                "favoritesCount": 0,
-                "author": {
-                    "username": "...",
-                    "bio": "...",
-                    "image": "...",
-                    "following": false
-                }
-            }
-        }
-        ```
-    
-    * `Multiple Article`
-
-        ```json
-        {
-            "articles":[{
-                "slug": "...",
-                "title": "...",
-                "description": "...?",
-                "body": "...",
-                "tagList": ["...", "..."],
-                "createdAt": "9999-99-99T00:00:00.000Z",
-                "updatedAt": "9999-99-99T00:00:00.000Z",
-                "favorited": false,
-                "favoritesCount": 0,
-                "author": {
-                    "username": "...",
-                    "bio": "...",
-                    "image": "...",
-                    "following": false
-                }
-            }, {
-                "slug": "...",
-                "title": "...",
-                "description": "...?",
-                "body": "...",
-                "tagList": ["...", "..."],
-                "createdAt": "9999-99-99T00:00:00.000Z",
-                "updatedAt": "9999-99-99T00:00:00.000Z",
-                "favorited": false,
-                "favoritesCount": 0,
-                "author": {
-                    "username": "...",
-                    "bio": "...",
-                    "image": "...",
-                    "following": false
-                }
-            }],
-            "articlesCount": 2
-        }
-        ```
-
-    * `Single Comment`
-
-        ```json
-        {
-            "comment": {
-                "id": 1,
-                "createdAt": "9999-99-99T00:00:00.000Z",
-                "updatedAt": "9999-99-99T00:00:00.000Z",
-                "body": "...",
-                "author": {
-                    "username": "...",
-                    "bio": "...",
-                    "image": "...",
-                    "following": false
-                }
-            }
-        }
-        ```
-    
-    * `Multiple Comments`
-
-        ```json
-        {
-            "comments": [{
-                "id": 1,
-                "createdAt": "9999-99-99T00:00:00.000Z",
-                "updatedAt": "9999-99-99T00:00:00.000Z",
-                "body": "...",
-                "author": {
-                    "username": "...",
-                    "bio": "...",
-                    "image": "...",
-                    "following": false
-                }
-            },{
-                "id": 1,
-                "createdAt": "9999-99-99T00:00:00.000Z",
-                "updatedAt": "9999-99-99T00:00:00.000Z",
-                "body": "...",
-                "author": {
-                "username": "...",
-                "bio": "...",
-                "image": "...",
-                "following": false
-                }
-            }]
-        }
-        ```
-    
-    * `List of Tags`
-
-        ```json
-        {
-            "tags": [
-                "reactjs",
-                "angularjs"
-            ]
-        }
-        ```
-
-    * `Errors and Status Codes`
-
-        ```json
-        {
-            "errors":{
-                "body": [
-                    "..."
-                ]
-            }
-        }
-        ```
     
     * `Default Success Code`
 
@@ -297,9 +133,7 @@ Project - Reactive Blog
 
     * `401 for Unauthorized requests`
 
-    * `400 for Bad requests`
 
-    * `404 for Not found requests`
 
 * End Point
 
@@ -316,27 +150,6 @@ Project - Reactive Blog
     | `Fallow User` | `POST` | `/api/profiles/:username/follow` |  | `Profile` | `YES`
     | `Unfallow User` | `DELETE` | `/api/profiles/:username/follow` |  | `Profile` | `YES`
     
-    * 블로그 내용 <br><br>
-
-    | Title | HTTP Method | URL | Request | Response | Auth
-    |:---:|:---:|:---:|:---:|:---:|:---:|
-    | `List Articles` | `GET` | `/api/articles` |  | `Multiple Articles` | `NO`
-    | `Filter by tag` | `GET` | `/api/articles?tag=springboot` |  | `Multiple Articles` | `NO`
-    | `Filter by author` | `GET` | `/api/articles?author=demo` |  | `Multiple Articles` | `NO`
-    | `Favorited by user` | `GET` | `/api/articles?favorited=demo` |  | `Multiple Articles` | `NO`
-    | `Limit number of articles` | `GET` | `/api/articles?limit=20` |  | `Multiple Articles` | `NO`
-    | `Offset/skip number of articles` | `GET` | `/api/articles?offset=0` |  | `Multiple Articles` | `NO`
-    | `Feed Articles` | `GET` | `/api/articles/feed` |  | `Multiple Articles` | `YES`
-    | `Get Articles` | `GET` | `/api/articles/:slug` |  | `Single article` | `YES`
-    | `Create Article` | `POST` | `/api/articles` | `{ "article": { "title": "How to train your dragon", "description": "Ever wonder how?", "body": "You have to believe", "tagList": ["reactjs", "angularjs", "dragons"] } }` | `Single article` | `YES`
-    | `Update Article` | `PUT` | `/api/articles/:slugs` | `{ "article": { "title": "Did you train your dragon?" } }` | `Single article` | `YES`
-    | `Delete Article` | `DELETE` | `/api/articles/:slug` | | | `YES`
-    | `Add Comments to an Article` | `POST` | `/api/articles/:slug/comments` | `{ "comment": { "body": "His name was my name too." } }` | `Single Comment` | `YES`
-    | `Get Comments from an Article` | `GET` | `/api/articles/:slug/comments` | | `Multiple comments` | `NO`
-    | `Delete Comment` | `DELETE` | `/api/articles/:slug/comments/:id` | | | `YES`
-    | `Favorite Article` | `POST` | `/api/articles/:slug/favorite` | | `Single article` | `YES`
-    | `Unfavorite Article` | `DELETE` | `/api/articles/:slug/favorite` | | `Single article` | `YES`
-    | `Get Tags` | `GET` | `/api/tags` | | `List of Tags` | `NO`
 
 </details>
 
