@@ -5,6 +5,7 @@ import com.sparta.myselectshopbeta.dto.ProductRequestDto;
 import com.sparta.myselectshopbeta.dto.ProductResponseDto;
 import com.sparta.myselectshopbeta.entity.Product;
 import com.sparta.myselectshopbeta.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,14 +13,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
-
-    @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     public ProductResponseDto createProduct(ProductRequestDto requestDto) throws SQLException {
         // 요청받은 DTO 로 DB에 저장할 객체 만들기
