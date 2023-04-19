@@ -5,6 +5,7 @@ import com.sparta.myselectshopbeta.dto.ProductMypriceRequestDto;
 import com.sparta.myselectshopbeta.dto.ProductRequestDto;
 import com.sparta.myselectshopbeta.dto.ProductResponseDto;
 import com.sparta.myselectshopbeta.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @Autowired
     public ProductController(ProductService productService) {
         this.productService =  productService;
     }
