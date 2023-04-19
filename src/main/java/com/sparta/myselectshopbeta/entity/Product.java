@@ -1,11 +1,13 @@
 package com.sparta.myselectshopbeta.entity;
 
+import com.sparta.myselectshopbeta.dto.ProductMypriceRequestDto;
 import com.sparta.myselectshopbeta.dto.ProductRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
 
 @Getter
 @Setter
@@ -38,5 +40,9 @@ public class Product {
         this.link = requestDto.getLink();
         this.lprice = requestDto.getLprice();
         this.myprice = 0;
+    }
+
+    public void update(ProductMypriceRequestDto requestDto) {
+        this.myprice = requestDto.getMyprice();
     }
 }
