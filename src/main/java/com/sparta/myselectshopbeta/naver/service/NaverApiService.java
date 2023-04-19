@@ -34,7 +34,7 @@ public class NaverApiService {
         return fromJSONtoItems(response);
     }
 
-    public List<ItemDto> fromJSONtoItems(String response) {
+    public List<ItemDto> fromJSONtoItems(String response) {//String response의 값은 JSON형식의 데이터
 
         JSONObject rjson = new JSONObject(response);
         JSONArray items  = rjson.getJSONArray("items");
