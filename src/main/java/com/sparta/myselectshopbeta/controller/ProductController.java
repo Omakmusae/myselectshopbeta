@@ -16,8 +16,8 @@ public class ProductController {
 
     private final ProductService productService;
 
-    public ProductController() {
-        this.productService =  new ProductService();
+    public ProductController(ProductService productService) {
+        this.productService =  productService;
     }
 
     // 관심 상품 등록하기
