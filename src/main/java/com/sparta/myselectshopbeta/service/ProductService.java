@@ -11,6 +11,10 @@ import com.sparta.myselectshopbeta.repository.ProductRepository;
 import com.sparta.myselectshopbeta.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,13 +60,19 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProductResponseDto> getProducts(HttpServletRequest request) {
-        // Request 헤더에서 Token 가져오기
+    public Page<Product> getProducts(HttpServletRequest request,
+                                     int page, int size, String sortBy, boolean isAsc) {
+        // 페이징 처리
+        Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort sort = Sort.by(direction, sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        // Request에서 Token 가져오기
         String token = jwtUtil.resolveToken(request);
-        Claims claims;//JWT안에 들어있는 정보들을 담을 수 있는 객체
+        Claims claims;
 
         // 토큰이 있는 경우에만 관심상품 조회 가능
-        if(token != null) {
+        if (token != null) {
             // Token 검증
             if (jwtUtil.validateToken(token)) {
                 // 토큰에서 사용자 정보 가져오기
@@ -71,7 +81,7 @@ public class ProductService {
                 throw new IllegalArgumentException("Token Error");
             }
 
-            // 토큰에서 가져온 사용자 정보를 사용하여 DB 조회 (claims.getSubject()안에 username 있음)
+            // 토큰에서 가져온 사용자 정보를 사용하여 DB 조회
             User user = userRepository.findByUsername(claims.getSubject()).orElseThrow(
                     () -> new IllegalArgumentException("사용자가 존재하지 않습니다.")
             );
@@ -80,23 +90,18 @@ public class ProductService {
             UserRoleEnum userRoleEnum = user.getRole();
             System.out.println("role = " + userRoleEnum);
 
-            List<ProductResponseDto> list = new ArrayList<>();
-            List<Product> productList;
+            Page<Product> products;
 
             if (userRoleEnum == UserRoleEnum.USER) {
                 // 사용자 권한이 USER일 경우
-                productList = productRepository.findAllByUserId(user.getId());
+                products = productRepository.findAllByUserId(user.getId(), pageable);
             } else {
-                productList = productRepository.findAll();
+                products = productRepository.findAll(pageable);
             }
 
-            for (Product product : productList) {
-                list.add(new ProductResponseDto(product));
-            }
+            return products;
 
-            return list;
-
-        }else {
+        } else {
             return null;
         }
     }
