@@ -3,6 +3,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -28,6 +29,9 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+    @OneToMany
+    private List<Folder> folders;
+
     public User(String username, String password, String email, UserRoleEnum role) {
         this.username = username;
         this.password = password;
@@ -35,3 +39,4 @@ public class User {
         this.role = role;
     }
 }
+
