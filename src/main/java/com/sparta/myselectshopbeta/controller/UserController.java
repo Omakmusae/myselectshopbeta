@@ -5,16 +5,13 @@ import com.sparta.myselectshopbeta.dto.SignupRequestDto;
 import com.sparta.myselectshopbeta.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller//html만 반환하니 Controller 처리
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userService;
 
     @GetMapping("/signup")
@@ -36,6 +33,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(LoginRequestDto loginRequestDto) {
         userService.login(loginRequestDto);
+        System.out.println("로그인 성공");
         return "redirect:/api/shop";
     }
 

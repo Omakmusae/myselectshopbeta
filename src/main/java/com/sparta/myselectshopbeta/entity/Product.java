@@ -1,5 +1,5 @@
 package com.sparta.myselectshopbeta.entity;
-
+import com.sparta.myselectshopbeta.naver.dto.ItemDto;
 import com.sparta.myselectshopbeta.dto.ProductMypriceRequestDto;
 import com.sparta.myselectshopbeta.dto.ProductRequestDto;
 import lombok.Getter;
@@ -8,12 +8,11 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @Getter
 @Setter
 @Entity // DB 테이블 역할을 합니다.
 @NoArgsConstructor
-public class Product {
+public class Product extends Timestamped{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID가 자동으로 생성 및 증가합니다.
@@ -45,4 +44,9 @@ public class Product {
     public void update(ProductMypriceRequestDto requestDto) {
         this.myprice = requestDto.getMyprice();
     }
+
+    public void updateByItemDto(ItemDto itemDto) { //스케줄러 기능을 위해 추가
+        this.lprice = itemDto.getLprice();
+    }
+
 }
