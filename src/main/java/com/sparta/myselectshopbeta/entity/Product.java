@@ -33,12 +33,16 @@ public class Product extends Timestamped{
     @Column(nullable = false)
     private int myprice;
 
-    public Product(ProductRequestDto requestDto) {
+    @Column(nullable = false)
+    private Long userId;//아직은 userId에 객체 대신 숫자
+
+    public Product(ProductRequestDto requestDto, Long userId) {
         this.title = requestDto.getTitle();
         this.image = requestDto.getImage();
         this.link = requestDto.getLink();
         this.lprice = requestDto.getLprice();
         this.myprice = 0;
+        this.userId = userId;
     }
 
     public void update(ProductMypriceRequestDto requestDto) {
